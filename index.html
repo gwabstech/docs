@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeasyPay Microaccounts API Documentation</title>
-    <link rel="icon" type="image/png" href="images/teasylogoon.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/monokai.min.css" />
+    <link rel="icon" type="image/png" href="images/teasylogoon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/monokai.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/json.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
@@ -22,8 +22,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--background-color);
@@ -196,12 +195,13 @@
 </head>
 
 <body>
+
     <button id="menu-toggle">☰</button>
     <div class="backdrop" id="backdrop"></div>
 
     <aside id="sidebar">
         <h2>TeasyPay Docs</h2>
-        <img id="sidebar-logo" src="images/teasylogoon.png" alt="TeasyPay Logo" />
+        <img id="sidebar-logo" src="images/teasylogoon.png" alt="TeasyPay Logo">
         <nav>
             <a href="#introduction">1.0 Introduction</a>
             <a href="#authentication">2.0 Authentication & Security</a>
@@ -209,7 +209,7 @@
             <a href="#headers">2.2 Request Headers</a>
             <a href="#signature-generation">2.3 Signature Generation</a>
             <a href="#endpoints">3.0 Endpoints</a>
-            <a href="#static-account">3.1 Static Account</a>
+            <a href="#static-account">3.1 Create a Static Account</a>
             <a href="#dynamic-account">3.2 Dynamic Account</a>
             <a href="#verify-transaction">3.3 Verify Transaction</a>
             <a href="#get-static">3.4 Get Static Accounts</a>
@@ -221,33 +221,22 @@
     <main id="main-content">
         <h1 id="introduction">TeasyPay Microaccounts API Documentation</h1>
         <p><strong>Version 1.0</strong></p>
-        <p>
-            The TeasyPay Microaccounts API provides a robust and secure way for
-            businesses to manage and automate payment collections through virtual
-            and static accounts. This documentation serves as a guide for developers
-            to integrate with our system, covering authentication, signature
-            generation, and the core API endpoints for account creation and
-            transaction verification.
-        </p>
-        <p>
-            All API communication is secured using HTTPS and requires a valid JWT
-            Bearer Token for authentication and an HMAC-SHA256 signature for request
-            integrity. All request and response bodies are formatted as JSON.
-        </p>
+        <p>The TeasyPay Microaccounts API provides a robust and secure way for businesses to manage and automate payment
+            collections through virtual and static accounts. This documentation serves as a guide for developers to
+            integrate with our system, covering authentication, signature generation, and the core API endpoints for
+            account creation and transaction verification.</p>
+        <p>All API communication is secured using HTTPS and requires a valid JWT Bearer Token for authentication and an
+            HMAC-SHA256 signature for request integrity. All request and response bodies are formatted as JSON.</p>
 
-        <hr />
+        <hr>
 
         <h2 id="authentication">2.0 Authentication & Security</h2>
-        <p>
-            All API calls must be authenticated and secured using a combination of a
-            JWT Bearer Token and HMAC-SHA256 signature headers.
-        </p>
+        <p>All API calls must be authenticated and secured using a combination of a JWT Bearer Token and HMAC-SHA256
+            signature headers.</p>
 
         <h3 id="token">2.1 Generating an Access Token</h3>
-        <p>
-            To begin, you must generate a short-lived access token using your unique
-            <code>client_id</code> and <code>client_secret</code>. This token
-            expires in 1 hour and must be refreshed.
+        <p>To begin, you must generate a short-lived access token using your unique <code>client_id</code> and
+            <code>client_secret</code>. This token expires in 1 hour and must be refreshed.
         </p>
         <h4>Endpoint:</h4>
         <pre><code class="language-bash">POST https://payments.teasypay.ng/tap2/tokentest/v1/generatetoken</code></pre>
@@ -255,8 +244,8 @@
         <pre><code class="language-json">Content-Type: application/json</code></pre>
         <h4>Request Body:</h4>
         <pre><code class="language-json">{
-  "client_id": "teasytest",
-  "client_secret": "407bbad913f49806c66c05702fec2285"
+  "client_id": "{your_client_id}",
+  "client_secret": "{your_client_secret}"
 }</code></pre>
         <h4>Successful Response:</h4>
         <pre><code class="language-json">{
@@ -265,15 +254,12 @@
   "expires": "1 hour",
   "description": "Token generated successfully",
   "Bearer": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ0ZWFzeXRlc3QiLCJleHAiOjE3NTgyMjMzMjR9.dXTMLN785nhsEB6qqg2lo2kufccTCTY4-a2fuUnCRjY"
+    "token": "{your_token}"
   }
 }</code></pre>
 
         <h3 id="headers">2.2 Request Headers</h3>
-        <p>
-            Once you have a valid token, every subsequent API request must include
-            the following headers:
-        </p>
+        <p>Once you have a valid token, every subsequent API request must include the following headers:</p>
         <table>
             <thead>
                 <tr>
@@ -286,7 +272,7 @@
                 <tr>
                     <td><code>Authorization</code></td>
                     <td>The JWT access token. Format: <code>Bearer {token}</code></td>
-                    <td><code>Bearer eyJhbGciOiJIUz...</code></td>
+                    <td><code>Bearer {your_token}</code></td>
                 </tr>
                 <tr>
                     <td><code>X-Timestamp</code></td>
@@ -296,7 +282,7 @@
                 <tr>
                     <td><code>X-Signature</code></td>
                     <td>The HMAC-SHA256 signature. See next section.</td>
-                    <td><code>0841e0c3b67efafb4f...</code></td>
+                    <td><code>{your_signature}</code></td>
                 </tr>
                 <tr>
                     <td><code>X-IV</code></td>
@@ -312,16 +298,12 @@
         </table>
 
         <h3 id="signature-generation">2.3 Signature Generation</h3>
-        <p>
-            The <code>X-Signature</code> header is a cryptographic signature that
-            verifies the integrity of your request. It is generated by computing an
-            <strong>HMAC-SHA256 hash</strong> of the concatenated string of the
-            <code>mainWalletNo</code> and the <code>X-Timestamp</code>, using your
-            private API key (<code>apkkey</code>) as the secret key.
+        <p>The <code>X-Signature</code> header is a cryptographic signature that verifies the integrity of your request.
+            It is generated by computing an <strong>HMAC-SHA256 hash</strong> of the concatenated string of the
+            <code>mainWalletNo</code> and the <code>X-Timestamp</code>, using your private API key (<code>apkkey</code>)
+            as the secret key.
         </p>
-        <p>
-            <strong>Signature Formula:</strong>
-            <code>signature = HMAC-SHA256(mainWalletNo + X-Timestamp, apkkey)</code>
+        <p><strong>Signature Formula:</strong> <code>signature = HMAC-SHA256(mainWalletNo + X-Timestamp, apkkey)</code>
         </p>
         <h4>Java Code Example:</h4>
         <pre><code class="language-java">import javax.crypto.Mac;
@@ -352,16 +334,13 @@ public class SignatureHelper {
     }
 }</code></pre>
 
-        <hr />
+        <hr>
 
         <h2 id="endpoints">3.0 Endpoints</h2>
 
         <div class="section">
             <h3 id="static-account">3.1 Create a Static Sub-account</h3>
-            <p>
-                Creates a permanent sub-account tied to your main wallet for
-                consistent collections.
-            </p>
+            <p>Creates a permanent sub-account tied to your main wallet for consistent collections.</p>
             <h4>Endpoint:</h4>
             <pre><code class="language-bash">POST https://payments.teasypay.ng/tap2/microaccounts/v1/addstaticaccount</code></pre>
             <h4>Request Body Parameters:</h4>
@@ -381,7 +360,7 @@ public class SignatureHelper {
                         <td>string</td>
                         <td>The main wallet number.</td>
                         <td>Yes</td>
-                        <td><code>2348100158586</code></td>
+                        <td><code>{your_main_wallet_number}</code></td>
                     </tr>
                     <tr>
                         <td><code>city</code></td>
@@ -434,10 +413,7 @@ public class SignatureHelper {
 
         <div class="section">
             <h3 id="dynamic-account">3.2 Create a Dynamic Virtual Account (DVA)</h3>
-            <p>
-                Generates a temporary, single-use virtual account for a specific
-                transaction amount and reference.
-            </p>
+            <p>Generates a temporary, single-use virtual account for a specific transaction amount and reference.</p>
             <h4>Endpoint:</h4>
             <pre><code class="language-bash">POST https://payments.teasypay.ng/tap2/microaccounts/v1/adddynamicaccount</code></pre>
             <h4>Request Body Parameters:</h4>
@@ -457,7 +433,7 @@ public class SignatureHelper {
                         <td>string</td>
                         <td>The main wallet number.</td>
                         <td>Yes</td>
-                        <td><code>2348100158586</code></td>
+                        <td><code>{your_main_wallet_number}</code></td>
                     </tr>
                     <tr>
                         <td><code>city</code></td>
@@ -563,7 +539,7 @@ public class SignatureHelper {
                         <td>string</td>
                         <td>The main wallet number.</td>
                         <td>Yes</td>
-                        <td><code>2348100158586</code></td>
+                        <td><code>{your_main_wallet_number}</code></td>
                     </tr>
                     <tr>
                         <td><code>subWalletNo</code></td>
@@ -616,10 +592,7 @@ public class SignatureHelper {
 
         <div class="section">
             <h3 id="get-static">3.4 Get Static Accounts</h3>
-            <p>
-                Retrieves a list of all static sub-accounts created under a main
-                wallet.
-            </p>
+            <p>Retrieves a list of all static sub-accounts created under a main wallet.</p>
             <h4>Endpoint:</h4>
             <pre><code class="language-bash">POST https://payments.teasypay.ng/tap2/microaccounts/v1/getstaticaccounts</code></pre>
             <h4>Request Body Parameters:</h4>
@@ -639,7 +612,7 @@ public class SignatureHelper {
                         <td>string</td>
                         <td>The main wallet number.</td>
                         <td>Yes</td>
-                        <td><code>2348100158586</code></td>
+                        <td><code>{your_main_wallet_number}</code></td>
                     </tr>
                     <tr>
                         <td><code>subWalletNo</code></td>
@@ -679,9 +652,7 @@ public class SignatureHelper {
         </div>
 
         <div class="section">
-            <h3 id="simulate-transfer">
-                3.5 Simulate NIP Inward Transfer (Testing Only)
-            </h3>
+            <h3 id="simulate-transfer">3.5 Simulate NIP Inward Transfer (Testing Only)</h3>
             <p>Simulates an incoming NIP transfer for testing purposes.</p>
             <h4>Endpoint:</h4>
             <pre><code class="language-bash">POST https://payments.teasypay.ng/tap2/microaccounts/v1/nipftinwardsimulate</code></pre>
@@ -702,7 +673,7 @@ public class SignatureHelper {
                         <td>string</td>
                         <td>The recipient's main wallet number.</td>
                         <td>Yes</td>
-                        <td><code>2348100158586</code></td>
+                        <td><code>{your_main_wallet_number}</code></td>
                     </tr>
                     <tr>
                         <td><code>beneficiarysubWalletNo</code></td>
@@ -820,47 +791,31 @@ public class SignatureHelper {
 }</code></pre>
         </div>
 
-        <hr />
+        <hr>
 
         <div class="section">
             <h2 id="webhooks">4.0 Webhooks</h2>
-            <p>
-                TeasyPay uses webhooks to notify you in real-time about events that
-                occur on your account, such as successful payments. This eliminates
-                the need for constant polling and allows for a more efficient
-                integration.
-            </p>
+            <p>TeasyPay uses webhooks to notify you in real-time about events that occur on your account, such as
+                successful payments. This eliminates the need for constant polling and allows for a more efficient
+                integration.</p>
 
             <h3 id="webhook-config">4.1 Webhook URL Configuration</h3>
-            <p>
-                To receive webhook notifications, you must configure a secure endpoint
-                URL in your TeasyPay account settings. Our system will send
-                <strong>HTTP POST</strong> requests with event payloads to this URL.
-            </p>
+            <p>To receive webhook notifications, you must configure a secure endpoint URL in your TeasyPay account
+                settings. Our system will send <strong>HTTP POST</strong> requests with event payloads to this URL.</p>
 
             <h3 id="webhook-security">4.2 Security</h3>
-            <p>
-                For security, every webhook request is signed with a signature that
-                you must verify to confirm its authenticity. The signature is an
-                <strong>HMAC-SHA256 hash</strong> of the
-                <strong>raw request body</strong>, and it is signed using your private
-                API key (<code>apkkey</code>). The signature is sent in a header,
-                typically <code>X-Teasy-Signature</code>.
+            <p>For security, every webhook request is signed with a signature that you must verify to confirm its
+                authenticity. The signature is an <strong>HMAC-SHA256 hash</strong> of the <strong>raw request
+                    body</strong>, and it is signed using your private API key (<code>apkkey</code>). The signature is
+                sent in a header, typically <code>X-Teasy-Signature</code>.</p>
+            <p><strong>Webhook Signature Formula:</strong> <code>signature = HMAC-SHA256(request_body, apkkey)</code>
             </p>
-            <p>
-                <strong>Webhook Signature Formula:</strong>
-                <code>signature = HMAC-SHA256(request_body, apkkey)</code>
-            </p>
-            <p>
-                To verify, compute the signature of the raw request body and compare
-                it with the <code>X-Teasy-Signature</code> header value.
+            <p>To verify, compute the signature of the raw request body and compare it with the
+                <code>X-Teasy-Signature</code> header value.
             </p>
 
             <h3 id="webhook-payload">4.3 Webhook Payload</h3>
-            <p>
-                The webhook payload is a JSON object that provides detailed
-                information about the event.
-            </p>
+            <p>The webhook payload is a JSON object that provides detailed information about the event.</p>
             <h4>Sample Payload:</h4>
             <pre><code class="language-json">{
   "event": "credit.successful",
@@ -896,89 +851,84 @@ public class SignatureHelper {
   }
 }</code></pre>
         </div>
+
     </main>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener('DOMContentLoaded', () => {
             // Initialize highlight.js
             hljs.highlightAll();
 
             // Add "Copy" button to all <pre> blocks
-            const codeBlocks = document.querySelectorAll("pre");
-            codeBlocks.forEach((block) => {
-                const button = document.createElement("button");
-                button.className = "copy-btn";
-                button.textContent = "Copy";
+            const codeBlocks = document.querySelectorAll('pre');
+            codeBlocks.forEach(block => {
+                const button = document.createElement('button');
+                button.className = 'copy-btn';
+                button.textContent = 'Copy';
                 block.appendChild(button);
 
-                button.addEventListener("click", () => {
-                    const code = block.querySelector("code").innerText;
+                button.addEventListener('click', () => {
+                    const code = block.querySelector('code').innerText;
                     // Use a fallback for navigator.clipboard.writeText due to iframe security
                     if (navigator.clipboard && navigator.clipboard.writeText) {
                         navigator.clipboard.writeText(code);
                     } else {
-                        const textarea = document.createElement("textarea");
+                        const textarea = document.createElement('textarea');
                         textarea.value = code;
                         document.body.appendChild(textarea);
                         textarea.select();
-                        document.execCommand("copy");
+                        document.execCommand('copy');
                         document.body.removeChild(textarea);
                     }
-                    button.textContent = "Copied!";
+                    button.textContent = 'Copied!';
                     setTimeout(() => {
-                        button.textContent = "Copy";
+                        button.textContent = 'Copy';
                     }, 2000);
                 });
             });
 
             // Sidebar and backdrop functionality for mobile responsiveness
-            const sidebar = document.getElementById("sidebar");
-            const menuToggle = document.getElementById("menu-toggle");
-            const backdrop = document.getElementById("backdrop");
-            const links = document.querySelectorAll("#sidebar a");
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.getElementById('menu-toggle');
+            const backdrop = document.getElementById('backdrop');
+            const links = document.querySelectorAll('#sidebar a');
 
             const toggleSidebar = () => {
-                sidebar.classList.toggle("active");
-                backdrop.style.display = sidebar.classList.contains("active")
-                    ? "block"
-                    : "none";
+                sidebar.classList.toggle('active');
+                backdrop.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
             };
 
-            menuToggle.addEventListener("click", toggleSidebar);
-            backdrop.addEventListener("click", toggleSidebar);
+            menuToggle.addEventListener('click', toggleSidebar);
+            backdrop.addEventListener('click', toggleSidebar);
 
             // Hide sidebar on link click
-            links.forEach((link) => {
-                link.addEventListener("click", () => {
-                    if (sidebar.classList.contains("active")) {
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (sidebar.classList.contains('active')) {
                         toggleSidebar();
                     }
                 });
             });
 
             // Active link highlighting for sidebar based on scroll position
-            const sections = document.querySelectorAll("h1[id], h2[id], h3[id]");
+            const sections = document.querySelectorAll('h1[id], h2[id], h3[id]');
 
             const setActiveLink = () => {
-                const currentPos =
-                    window.scrollY || document.documentElement.scrollTop;
+                const currentPos = window.scrollY || document.documentElement.scrollTop;
                 let activeFound = false;
 
                 // First, remove active class from all links
-                links.forEach((link) => link.classList.remove("active"));
+                links.forEach(link => link.classList.remove('active'));
 
                 // Then, find and activate the correct link
                 for (let i = sections.length - 1; i >= 0; i--) {
                     const section = sections[i];
                     const top = section.offsetTop;
 
-                    if (currentPos >= top - 200) {
-                        // Offset for header
-                        const matchingLink = document.querySelector(
-                            `#sidebar a[href="#${section.id}"]`
-                        );
+                    if (currentPos >= top - 200) { // Offset for header
+                        const matchingLink = document.querySelector(`#sidebar a[href="#${section.id}"]`);
                         if (matchingLink) {
-                            matchingLink.classList.add("active");
+                            matchingLink.classList.add('active');
                         }
                         activeFound = true;
                         break;
@@ -987,16 +937,14 @@ public class SignatureHelper {
 
                 // If no section is active (e.g., at the very top of the page), activate the "Introduction" link
                 if (!activeFound && sections.length > 0) {
-                    const firstLink = document.querySelector(
-                        `#sidebar a[href="#${sections[0].id}"]`
-                    );
+                    const firstLink = document.querySelector(`#sidebar a[href="#${sections[0].id}"]`);
                     if (firstLink) {
-                        firstLink.classList.add("active");
+                        firstLink.classList.add('active');
                     }
                 }
             };
 
-            window.addEventListener("scroll", setActiveLink);
+            window.addEventListener('scroll', setActiveLink);
             setActiveLink();
         });
     </script>
